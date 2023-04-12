@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menu">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.samplekotlincfd.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.samplekotlincfd.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <argument
+            android:name="myArg"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/cart"
+        android:name="com.example.samplekotlincfd.Cart"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cart_to_menu"
+            app:destination="@id/menu" />
+        <argument
+            android:name="Cost"
+            app:argType="integer[]" />
+        <argument
+            android:name="FoodItems"
+            app:argType="string[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/hamburger"
+        android:name="com.example.samplekotlincfd.Hamburger"
+        android:label="Hamburger"
+        tools:layout="@layout/fragment_hamburger" >
+        <action
+            android:id="@+id/action_hamburger_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_hamburger_to_menu"
+            app:destination="@id/menu" />
+        <argument
+            android:name="Cost"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="FoodItems"
+            app:argType="string[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/pizza"
+        android:name="com.example.samplekotlincfd.Pizza"
+        android:label="Pizza"
+        tools:layout="@layout/fragment_pizza" >
+        <action
+            android:id="@+id/action_pizza_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_pizza_to_menu"
+            app:destination="@id/menu" />
+        <argument
+            android:name="Cost"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="FoodItems"
+            app:argType="string[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/soup"
+        android:name="com.example.samplekotlincfd.Soup"
+        android:label="Soup"
+        tools:layout="@layout/fragment_soup" >
+        <action
+            android:id="@+id/action_soup_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_soup_to_menu"
+            app:destination="@id/menu" />
+        <argument
+            android:name="Cost"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="FoodItems"
+            app:argType="string[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu"
+        android:name="com.example.samplekotlincfd.Menu"
+        android:label="Menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menu_to_soup"
+            app:destination="@id/soup" />
+        <action
+            android:id="@+id/action_menu_to_pizza"
+            app:destination="@id/pizza" />
+        <action
+            android:id="@+id/action_menu_to_hamburger"
+            app:destination="@id/hamburger" />
+        <action
+            android:id="@+id/action_menu_to_cart"
+            app:destination="@id/cart" />
+        <argument
+            android:name="Cost"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="FoodItems"
+            app:argType="string[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+</navigation>
