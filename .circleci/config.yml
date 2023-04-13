@@ -9,34 +9,45 @@ jobs:
       image: android:2023.04.1
     steps:
       - checkout
-
+      - run: ./gradlew build -x lint
       - gradle/collect_test_results
       - store_artifacts:
           path: report.json
   kotlin-test:
-    docker:  
-      - image: cimg/android:2023.04
+    machine:
+      image: android:2023.04.1
     steps:
       - checkout
-      - android/create-avd:
-          avd-name: 'Kotlin AVD'
-          install: false
-          system-image: system-images;android-UpsideDownCake;default;x86
+      - run: echo $ANDROID_HOME
       - android/start-emulator-and-run-tests:
-          avd-name: 'Kotlin AVD'
+          avd-name: 'kotlin'
+          system-image: system-images;android-UpsideDownCake;google_apis;x86_64
+      - gradle/collect_test_results
       
 
 workflows:
   test-and-build-kotlin:
     jobs:
-      - gradle/test
-      - kotlin-test
-      - kotlin-build
-          requires:
-            - kotlin-test
-      - android/run-ui-tests
+      - android/run-ui-tests:
+          executor:
+            name: android/android-machine
+            tag: "2023.04.1"
+          system-image: "system-images;android-UpsideDownCake;google_apis;x86_64"
+          install-system-image: true
+      - gradle/test:
+          executor:
+            name: android/android-docker
+            tag: "2023.04.1"
       - gradle/run:
+          executor:
+            name: android/android-machine
+            tag: "2023.04.1"
           requires:
             - gradle/test
             - android/run-ui-tests
+      - kotlin-test
+      - kotlin-build:
+          requires:
+            - kotlin-test
+      
      

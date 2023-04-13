@@ -22,8 +22,9 @@
         android:id="@+id/soup_button"
         android:layout_width="360dp"
         android:layout_height="150dp"
-        android:layout_marginStart="25dp"
         android:backgroundTint="@color/white"
+        android:text=" "
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pizza_button" />
 
@@ -78,8 +79,9 @@
         android:id="@+id/pizza_button"
         android:layout_width="360dp"
         android:layout_height="150dp"
-        android:layout_marginStart="25dp"
         android:backgroundTint="@color/white"
+        android:text=" "
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hamburger_button" />
 
@@ -134,9 +136,10 @@
         android:id="@+id/hamburger_button"
         android:layout_width="360dp"
         android:layout_height="150dp"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/white"
+        android:text=" "
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
