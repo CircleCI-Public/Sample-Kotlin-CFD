@@ -1,4 +1,4 @@
-package com.example.samplekotlincfd
+package com.samplekotlincfd
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.samplekotlincfd.databinding.FragmentFirstBinding
+import com.samplekotlincfd.databinding.FragmentFirstBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.

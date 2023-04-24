@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.samplekotlincfd.FirstFragment"
+        android:name="com.samplekotlincfd.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.samplekotlincfd.SecondFragment"
+        android:name="com.samplekotlincfd.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/cart"
-        android:name="com.example.samplekotlincfd.Cart"
+        android:name="com.samplekotlincfd.Cart"
         android:label="Cart"
         tools:layout="@layout/fragment_cart" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/hamburger"
-        android:name="com.example.samplekotlincfd.Hamburger"
+        android:name="com.samplekotlincfd.Hamburger"
         android:label="Hamburger"
         tools:layout="@layout/fragment_hamburger" >
         <action
@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/pizza"
-        android:name="com.example.samplekotlincfd.Pizza"
+        android:name="com.samplekotlincfd.Pizza"
         android:label="Pizza"
         tools:layout="@layout/fragment_pizza" >
         <action
@@ -89,7 +89,7 @@
     </fragment>
     <fragment
         android:id="@+id/soup"
-        android:name="com.example.samplekotlincfd.Soup"
+        android:name="com.samplekotlincfd.Soup"
         android:label="Soup"
         tools:layout="@layout/fragment_soup" >
         <action
@@ -111,7 +111,7 @@
     </fragment>
     <fragment
         android:id="@+id/menu"
-        android:name="com.example.samplekotlincfd.Menu"
+        android:name="com.samplekotlincfd.Menu"
         android:label="Menu"
         tools:layout="@layout/fragment_menu" >
         <action
