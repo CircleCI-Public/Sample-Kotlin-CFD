@@ -1,4 +1,4 @@
-package com.example.samplekotlincfd
+package com.samplekotlincfd
 
 import android.os.Bundle
 import android.os.Debug

@@ -4,22 +4,62 @@ plugins {
     id 'androidx.navigation.safeargs'
 }
 
-android {
-    namespace 'com.example.samplekotlincfd'
-    compileSdk 33
+ext.versionMajor = 1
+ext.versionMinor = 0
+ext.versionPatch = 1
+ext.versionClassifier = null
+ext.isSnapShot = false
+ext.minSdkVersion = 21
 
-    defaultConfig {
-        applicationId "com.example.samplekotlincfd"
-        minSdk 33
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+private Integer generateVersionCode() {
+    return ext.minSdkVersion * 10000000 + ext.versionMajor * 10000 +
+            ext.versionMinor * 100 + ext.versionPatch
+}
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+private String generateVersionName() {
+    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+
+    if (ext.versionClassifier == null) {
+        if (ext.isSnapShot) {
+            ext.versionClassifier = "SNAPSHOT"
+        }
     }
 
+    if (ext.versionClassifier != null) {
+        versionName += "-" + ext.versionClassifer
+    }
+
+    return versionName
+}
+
+def keyStorePropertiesFile = rootProject.file("keystore.properties")
+def keyStoreProperties = new Properties()
+keyStoreProperties.load(new FileInputStream(keyStorePropertiesFile))
+
+android {
+    namespace 'com.samplekotlincfd'
+    compileSdk 33
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.samplekotlincfd"
+        minSdk 33
+        targetSdk 33
+        versionName generateVersionName()
+        versionCode generateVersionCode()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+            keyAlias keyStoreProperties['releaseKeyAlias']
+            keyPassword keyStoreProperties['releaseKeyPassword']
+            storeFile file(keyStoreProperties['releaseKeyStore'])
+            storePassword keyStoreProperties['releaseStorePassword']
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

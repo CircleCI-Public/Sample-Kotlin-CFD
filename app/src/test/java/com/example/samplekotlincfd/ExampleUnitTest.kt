@@ -1,4 +1,4 @@
-package com.example.samplekotlincfd
+package com.samplekotlincfd
 
 import org.junit.Test
 
