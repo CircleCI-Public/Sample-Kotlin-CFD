@@ -9,6 +9,16 @@ jobs:
       image: android:2023.04.1
     steps:
       - checkout
+      - run:
+          name: Decode Android key store
+          command: echo $BASE64_KEYSTORE | base64 -d | tee keystore app/keystore > /dev/null
+      - run:
+          name: Create keystore.properties
+          command: printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=./keystore\nreleaseStorePassword=%s' \
+            $RELEASE_KEY_ALIAS $RELEASE_KEY_PASSWORD $RELEASE_STORE_PASSWORD > keystore.properties
+      - run:
+          name: Create Google Play key
+          command: echo $GOOGLE_PLAY_KEY > ./google-play-key.json
       - run: ./gradlew build -x lint
       - gradle/collect_test_results
       - store_artifacts:
@@ -23,7 +33,23 @@ jobs:
           avd-name: 'kotlin'
           system-image: system-images;android-UpsideDownCake;google_apis;x86_64
       - gradle/collect_test_results
-      
+  deploy-beta:
+    docker:
+      - image: cimg/android:2022.06
+    steps:
+      - checkout
+      - run:
+          name: Decode Android key store
+          command: echo $BASE64_KEYSTORE | base64 -d | tee keystore app/keystore > /dev/null
+      - run:
+          name: Create keystore.properties
+          command: printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=./keystore\nreleaseStorePassword=%s' \
+            $RELEASE_KEY_ALIAS $RELEASE_KEY_PASSWORD $RELEASE_STORE_PASSWORD > keystore.properties
+      - run:
+          name: Create Google Play key
+          command: echo $GOOGLE_PLAY_KEY > ./google-play-key.json
+      - run: sudo gem install fastlane
+      - run: bundle install && bundle exec fastlane deploy
 
 workflows:
   test-and-build-kotlin:
@@ -38,16 +64,17 @@ workflows:
           executor:
             name: android/android-docker
             tag: "2023.04.1"
-      - gradle/run:
-          executor:
-            name: android/android-machine
-            tag: "2023.04.1"
-          requires:
-            - gradle/test
-            - android/run-ui-tests
       - kotlin-test
       - kotlin-build:
           requires:
             - kotlin-test
+            - gradle/test
+      - deploy-beta:
+          filters:
+            branches:
+              only: main
+          requires:
+            - kotlin-build
+          
       
      
